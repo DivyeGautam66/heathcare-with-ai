@@ -52,16 +52,16 @@ export default function Dashboard() {
   const riskScore = 78
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div className="dashboard-page" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Page header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="dashboard-page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <h1 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'Outfit' }}>Risk Assessment Dashboard</h1>
+          <h1 className="dashboard-page-title" style={{ fontSize: '1.6rem', fontWeight: 800 }}>Risk Assessment Dashboard</h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '0.2rem' }}>Patient: Sarah Mitchell · ID: PA-2847 · Updated just now</p>
         </div>
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
-          <button className="btn-secondary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem' }}>Export PDF</button>
-          <button className="btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem' }}>New Assessment</button>
+        <div className="dashboard-page-actions" style={{ display: 'flex', gap: '0.75rem' }}>
+          <button className="ghost-button" style={{ padding: '0.7rem 1.2rem', fontSize: '0.85rem' }}>Export PDF</button>
+          <button className="primary-button" style={{ padding: '0.7rem 1.2rem', fontSize: '0.85rem' }}>New Assessment</button>
         </div>
       </div>
 

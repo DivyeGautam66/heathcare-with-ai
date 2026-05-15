@@ -160,10 +160,10 @@ export default function LandingPage(_props: LandingPageProps) {
           </div>
 
           <div className="nav-actions">
-            <Link to="/dashboard" className="ghost-button">
+            <Link to="/login" className="ghost-button">
               Login
             </Link>
-            <Link to="/symptom-checker" className="primary-button">
+            <Link to="/get-started" className="primary-button">
               Get Started
             </Link>
             <button
@@ -228,7 +228,7 @@ export default function LandingPage(_props: LandingPageProps) {
               </p>
 
               <div className="hero-actions">
-                <Link to="/symptom-checker" className="primary-button hero-primary">
+                <Link to="/get-started" className="primary-button hero-primary">
                   Get Started
                   <ArrowRight size={16} />
                 </Link>

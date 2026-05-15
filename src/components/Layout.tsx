@@ -23,13 +23,15 @@ export default function Layout({ darkMode, setDarkMode }: LayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg)' }}>
+    <div className="landing-shell app-shell" style={{ display: 'flex', minHeight: '100vh' }}>
+      <div className="landing-orb landing-orb-a" />
+      <div className="landing-orb landing-orb-b" />
+      <div className="landing-grid" />
+
       {/* Sidebar */}
-      <aside style={{
+      <aside className="dashboard-sidebar lg:relative lg:left-0" style={{
         width: sidebarOpen ? '260px' : '0',
         minWidth: sidebarOpen ? '260px' : '260px',
-        background: 'var(--surface)',
-        borderRight: '1px solid var(--border)',
         display: 'flex',
         flexDirection: 'column',
         transition: 'all 0.3s ease',
@@ -39,20 +41,15 @@ export default function Layout({ darkMode, setDarkMode }: LayoutProps) {
         height: '100vh',
         zIndex: 100,
         overflowY: 'auto',
-      }}
-      className="lg:relative lg:left-0">
+      }}>
         {/* Logo */}
-        <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <div style={{
-            width: '36px', height: '36px', borderRadius: '10px',
-            background: 'linear-gradient(135deg, #2563EB, #14B8A6)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center'
-          }}>
+        <div className="dashboard-sidebar-header" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div className="dashboard-brand-icon" style={{ width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Activity size={20} color="white" />
           </div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-primary)', fontFamily: 'Outfit' }}>MediAI</div>
-            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 500 }}>Healthcare Triage System</div>
+            <div className="dashboard-brand-title">MediQo</div>
+            <div className="dashboard-brand-subtitle">Healthcare Intelligence System</div>
           </div>
           <button onClick={() => setSidebarOpen(false)} style={{ marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }} className="lg:hidden">
             <X size={20} />
@@ -60,7 +57,7 @@ export default function Layout({ darkMode, setDarkMode }: LayoutProps) {
         </div>
 
         {/* Nav */}
-        <nav style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+        <nav style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
           {navItems.map(({ to, icon: Icon, label }) => (
             <NavLink
               key={to}
@@ -75,15 +72,12 @@ export default function Layout({ darkMode, setDarkMode }: LayoutProps) {
         </nav>
 
         {/* Bottom */}
-        <div style={{ padding: '1rem', borderTop: '1px solid var(--border)' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, rgba(37,99,235,0.1), rgba(20,184,166,0.1))',
-            borderRadius: '12px', padding: '1rem'
-          }}>
-            <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#2563EB', marginBottom: '0.25rem' }}>AI System Status</div>
+        <div className="dashboard-sidebar-footer" style={{ padding: '1rem' }}>
+          <div className="dashboard-status-card" style={{ borderRadius: '18px', padding: '1rem' }}>
+            <div className="dashboard-status-title">AI System Status</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981', animation: 'blink 2s infinite' }} />
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>All systems operational</span>
+              <span className="dashboard-status-copy">All systems operational</span>
             </div>
           </div>
         </div>
@@ -99,21 +93,9 @@ export default function Layout({ darkMode, setDarkMode }: LayoutProps) {
       )}
 
       {/* Main content */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, marginLeft: '260px' }}
-           className="responsive-main">
+      <div className="responsive-main dashboard-main-shell" style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, marginLeft: '260px' }}>
         {/* Topbar */}
-        <header style={{
-          background: 'var(--surface)',
-          borderBottom: '1px solid var(--border)',
-          padding: '0 1.5rem',
-          height: '64px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1rem',
-          position: 'sticky',
-          top: 0,
-          zIndex: 50,
-        }}>
+        <header className="dashboard-topbar" style={{ padding: '0 1.5rem', height: '72px', display: 'flex', alignItems: 'center', gap: '1rem', position: 'sticky', top: 0, zIndex: 50 }}>
           <button
             onClick={() => setSidebarOpen(true)}
             style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', padding: '0.5rem' }}
@@ -122,11 +104,7 @@ export default function Layout({ darkMode, setDarkMode }: LayoutProps) {
             <Menu size={22} />
           </button>
 
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: '0.5rem',
-            background: 'var(--bg)', borderRadius: '10px', padding: '0.5rem 1rem',
-            border: '1px solid var(--border)', flex: 1, maxWidth: '400px'
-          }}>
+          <div className="dashboard-search" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.7rem 1rem', flex: 1, maxWidth: '430px' }}>
             <Search size={16} color="var(--text-muted)" />
             <input
               type="text"
@@ -139,41 +117,30 @@ export default function Layout({ darkMode, setDarkMode }: LayoutProps) {
           </div>
 
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <button style={{
-              position: 'relative', background: 'none', border: 'none', cursor: 'pointer',
-              color: 'var(--text-secondary)', padding: '0.5rem'
-            }}>
+            <button className="dashboard-icon-button" style={{ position: 'relative', border: 'none', cursor: 'pointer', padding: '0.65rem' }}>
               <Bell size={20} />
               <span style={{
                 position: 'absolute', top: '6px', right: '6px',
                 width: '8px', height: '8px', borderRadius: '50%',
-                background: '#EF4444', border: '2px solid var(--surface)'
+                background: '#EF4444', border: '2px solid white'
               }} />
             </button>
 
             <button
               onClick={() => setDarkMode(!darkMode)}
-              style={{
-                background: 'var(--bg)', border: '1px solid var(--border)',
-                borderRadius: '10px', padding: '0.5rem', cursor: 'pointer',
-                color: 'var(--text-secondary)', display: 'flex', alignItems: 'center'
-              }}
+              className="dashboard-icon-button"
+              style={{ border: 'none', padding: '0.65rem', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
             >
               {darkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
 
-            <div style={{
-              width: '36px', height: '36px', borderRadius: '50%',
-              background: 'linear-gradient(135deg, #2563EB, #14B8A6)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: 'white', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer'
-            }}>
+            <div className="dashboard-avatar" style={{ width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}>
               DR
             </div>
           </div>
         </header>
 
-        <main style={{ flex: 1, overflowY: 'auto', padding: '1.5rem' }}>
+        <main className="dashboard-main" style={{ flex: 1, overflowY: 'auto', padding: '1.5rem' }}>
           <Outlet />
         </main>
       </div>

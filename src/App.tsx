@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Layout from './components/Layout'
 import LandingPage from './pages/LandingPage'
+import GetStartedPage from './pages/GetStartedPage'
+import LoginPage from './pages/LoginPage'
 import SymptomChecker from './pages/SymptomChecker'
 import Dashboard from './pages/Dashboard'
 import Analytics from './pages/Analytics'
@@ -24,6 +26,8 @@ export default function App() {
     <div className={darkMode ? 'dark' : ''} style={{ minHeight: '100vh', background: 'var(--bg)' }}>
       <Routes>
         <Route path="/" element={<LandingPage darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/get-started" element={<GetStartedPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route element={<Layout darkMode={darkMode} setDarkMode={setDarkMode} />}>
           <Route path="/symptom-checker" element={<SymptomChecker />} />
           <Route path="/dashboard" element={<Dashboard />} />
