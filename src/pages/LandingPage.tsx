@@ -13,7 +13,6 @@ import {
   Menu,
   MessageSquareHeart,
   Microscope,
-  Play,
   ShieldCheck,
   Stethoscope,
   TestTube2,
@@ -62,24 +61,24 @@ const aiCards = [
 const planFeatures = [
   {
     name: 'Essential',
-    monthly: '$29',
-    yearly: '$19',
+    monthly: '₹100',
+    yearly: '₹1000',
     description: 'For individuals beginning their AI-supported health journey.',
     features: ['AI symptom triage', '2 video consultations', 'Health timeline', 'Smart lab reminders'],
     highlight: false,
   },
   {
     name: 'Premium',
-    monthly: '$79',
-    yearly: '$59',
+    monthly: '₹500',
+    yearly: '₹5000',
     description: 'Best for proactive care, prevention, and specialist coordination.',
     features: ['Unlimited AI check-ins', 'Priority doctor access', 'Advanced analytics', 'Family health dashboard'],
     highlight: true,
   },
   {
     name: 'Enterprise',
-    monthly: '$149',
-    yearly: '$119',
+    monthly: '₹1000',
+    yearly: '₹11000',
     description: 'For clinics and care networks delivering futuristic patient experiences.',
     features: ['Multi-user roles', 'Custom workflows', 'Population health insights', 'Dedicated success support'],
     highlight: false,
@@ -321,24 +320,25 @@ export default function LandingPage(_props: LandingPageProps) {
           <div className="immersive-grid">
             <motion.div {...fadeUp} className="section-copy">
               <span>Immersive Doctor Experience</span>
-              <h2>Connect with your doctor in a next-generation consultation space.</h2>
+              <h2>Designed to make future care journeys feel clearer, calmer, and more supported.</h2>
               <p>
-                Mixed-reality inspired care flows help patients feel guided before, during, and after
-                every appointment. From pre-visit symptom capture to live analytics overlays, the
-                experience stays warm instead of clinical.
+                We are building an experience that helps people prepare better, understand their health
+                data more easily, and feel more confident before they ever step into a clinic or book a
+                consultation. The goal is to replace confusion with clarity through thoughtful design and
+                AI-guided support.
               </p>
               <div className="benefit-list">
                 <div>
                   <ShieldCheck size={18} />
-                  HIPAA-minded communication flows
+                  Clear guidance before appointments and care decisions
                 </div>
                 <div>
                   <Cpu size={18} />
-                  AI-assisted note generation
+                  AI-powered summaries that simplify health information
                 </div>
                 <div>
                   <Video size={18} />
-                  Seamless video consultation controls
+                  A future-ready interface built for modern digital care
                 </div>
               </div>
             </motion.div>
@@ -349,34 +349,6 @@ export default function LandingPage(_props: LandingPageProps) {
                 <div className="visor" />
                 <div className="pulse-ring pulse-one" />
                 <div className="pulse-ring pulse-two" />
-              </div>
-
-              <div className="glass-card consult-card">
-                <div className="consult-header">
-                  <span>Live Consultation</span>
-                  <button type="button">
-                    <Play size={14} />
-                  </button>
-                </div>
-                <div className="consult-body">
-                  <div className="doctor-avatar large" />
-                  <div>
-                    <strong>Dr. Emily Stone</strong>
-                    <p>Respiratory Specialist</p>
-                  </div>
-                </div>
-                <div className="wave-bars">
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                </div>
-              </div>
-
-              <div className="glass-card profile-floating">
-                <p>Remote vitals synced</p>
-                <strong>SpO2 98%</strong>
               </div>
             </motion.div>
           </div>
