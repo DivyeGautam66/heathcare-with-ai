@@ -86,24 +86,6 @@ const planFeatures = [
   },
 ]
 
-const testimonials = [
-  {
-    name: 'Maya Chen',
-    role: 'Wellness Member',
-    quote: 'It feels like Apple designed healthcare for modern families. Every interaction is calm, clear, and incredibly smart.',
-  },
-  {
-    name: 'Dr. Elias Noor',
-    role: 'Clinical Advisor',
-    quote: 'The pre-consultation AI summaries save time and improve the quality of every remote visit we run.',
-  },
-  {
-    name: 'Nina Patel',
-    role: 'Remote Patient',
-    quote: 'Lab tracking, video care, and mental wellness all live in one elegant flow. It genuinely reduced my care anxiety.',
-  },
-]
-
 const faqItems = [
   {
     question: 'How does the AI assist with care?',
@@ -210,15 +192,6 @@ export default function LandingPage(_props: LandingPageProps) {
                 <a href="#contact" className="secondary-button">
                   Contact Us
                 </a>
-              </div>
-
-              <div className="hero-proof">
-                <div className="avatar-stack">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-                <p>Trusted by 167K+ users and modern care teams across global wellness programs.</p>
               </div>
             </motion.div>
 
@@ -497,33 +470,6 @@ export default function LandingPage(_props: LandingPageProps) {
                 <Link to="/dashboard" className={plan.highlight ? 'primary-button pricing-button' : 'secondary-button pricing-button'}>
                   Get Started
                 </Link>
-              </motion.article>
-            ))}
-          </div>
-        </section>
-
-        <section className="landing-section">
-          <motion.div {...fadeUp} className="section-heading">
-            <span>Testimonials</span>
-            <h2>Patients and clinicians describe the experience as calm, premium, and surprisingly intuitive.</h2>
-          </motion.div>
-
-          <div className="testimonial-grid">
-            {testimonials.map((item, index) => (
-              <motion.article
-                key={item.name}
-                className="testimonial-card glass-card"
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: index * 0.1 }}
-              >
-                <div className="testimonial-top">
-                  <div className="testimonial-avatar" />
-                  <div>
-                    <h3>{item.name}</h3>
-                    <p>{item.role}</p>
-                  </div>
-                </div>
-                <blockquote>{item.quote}</blockquote>
               </motion.article>
             ))}
           </div>
