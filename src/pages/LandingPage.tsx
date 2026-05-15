@@ -206,6 +206,18 @@ export default function LandingPage(_props: LandingPageProps) {
       <main>
         <section id="home" className="hero-section">
           <div className="section-frame hero-frame">
+            <div className="hero-frame-lines" aria-hidden="true" />
+            <div className="hero-dna-backdrop" aria-hidden="true">
+              <div className="hero-dna-strand hero-dna-strand-left" />
+              <div className="hero-dna-strand hero-dna-strand-right" />
+              {Array.from({ length: 10 }).map((_, index) => (
+                <span
+                  key={index}
+                  className="hero-dna-rib"
+                  style={{ top: `${12 + index * 7.2}%`, animationDelay: `${index * -0.4}s` }}
+                />
+              ))}
+            </div>
             <motion.div {...fadeUp} className="hero-copy">
               <h1>
                 Revolutionizing Global Healthcare with AI: Connect, Heal, Thrive
@@ -266,10 +278,17 @@ export default function LandingPage(_props: LandingPageProps) {
               >
                 <div className="card-badge">
                   <Microscope size={14} />
-                  Microscopic insight
+                  Cardiac insight
                 </div>
-                <div className="visual-swirl" />
-                <p>AI-enhanced scan quality with tissue pattern recognition.</p>
+                <div className="visual-swirl">
+                  <div className="medical-heart" aria-hidden="true">
+                    <span className="heart-core" />
+                    <span className="heart-pulse-line" />
+                    <span className="heart-orbit heart-orbit-a" />
+                    <span className="heart-orbit heart-orbit-b" />
+                  </div>
+                </div>
+                <p>AI-enhanced cardiac pattern recognition with soft anatomical visualization.</p>
               </motion.div>
 
               <motion.div
@@ -307,11 +326,6 @@ export default function LandingPage(_props: LandingPageProps) {
                 </div>
               </motion.div>
 
-              <div className="dna-helix" aria-hidden="true">
-                {Array.from({ length: 9 }).map((_, index) => (
-                  <span key={index} />
-                ))}
-              </div>
             </motion.div>
           </div>
         </section>
