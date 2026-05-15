@@ -15,7 +15,6 @@ import {
   Microscope,
   Play,
   ShieldCheck,
-  Sparkles,
   Stethoscope,
   TestTube2,
   Video,
@@ -195,10 +194,6 @@ export default function LandingPage(_props: LandingPageProps) {
         <section id="home" className="hero-section">
           <div className="section-frame hero-frame">
             <motion.div {...fadeUp} className="hero-copy">
-              <div className="eyebrow-pill">
-                <Sparkles size={14} />
-                AI-powered healthcare operating system
-              </div>
               <h1>
                 Revolutionizing Global Healthcare with AI: Connect, Heal, Thrive
               </h1>

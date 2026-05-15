@@ -492,7 +492,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
-  padding: 1.25rem 1.25rem 0;
+  padding: 0.5rem 1.25rem 0;
+  background: linear-gradient(180deg, rgba(238, 248, 243, 0.78), rgba(238, 248, 243, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .landing-nav,
@@ -522,8 +525,11 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.95rem 1.25rem;
-  border-radius: 26px;
+  padding: 0.7rem 0;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 .brand-mark {
@@ -574,6 +580,11 @@ body {
 
 .nav-desktop {
   gap: 1.5rem;
+  padding: 0.78rem 1.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(109, 160, 149, 0.08);
 }
 
 .nav-link,
@@ -632,8 +643,9 @@ body {
 .ghost-button,
 .mobile-menu-button {
   color: var(--landing-text);
-  background: rgba(255, 255, 255, 0.72);
-  border-color: rgba(161, 206, 194, 0.36);
+  background: rgba(255, 255, 255, 0.42);
+  border-color: rgba(255, 255, 255, 0.34);
+  box-shadow: 0 10px 24px rgba(109, 160, 149, 0.08);
 }
 
 .mobile-menu-button {
@@ -649,6 +661,8 @@ body {
   margin: 0.75rem auto 0;
   border-radius: 24px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.34);
 }
 
 .mobile-nav-link {
@@ -1462,7 +1476,7 @@ body {
   }
 
   .landing-nav {
-    padding: 0.85rem 1rem;
+    padding: 0.6rem 0;
   }
 
   .nav-desktop,
