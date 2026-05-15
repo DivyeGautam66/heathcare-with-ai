@@ -32,7 +32,6 @@ const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#contact' },
 ]
 
 const aiCards = [
@@ -112,6 +111,23 @@ export default function LandingPage(_props: LandingPageProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [openFaq, setOpenFaq] = useState(0)
 
+  const scrollToSection = (href: string) => {
+    const targetId = href.replace('#', '')
+    const target = document.getElementById(targetId)
+
+    if (!target) return
+
+    const navOffset = 132
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - navOffset
+
+    window.history.replaceState(null, '', href)
+    window.scrollTo({
+      top: Math.max(targetTop, 0),
+      behavior: 'smooth',
+    })
+    setMenuOpen(false)
+  }
+
   return (
     <div className="landing-shell">
       <div className="landing-orb landing-orb-a" />
@@ -129,7 +145,15 @@ export default function LandingPage(_props: LandingPageProps) {
 
           <div className="nav-desktop">
             {navLinks.map((link) => (
-              <a key={link.label} href={link.href} className="nav-link">
+              <a
+                key={link.label}
+                href={link.href}
+                className="nav-link"
+                onClick={(event) => {
+                  event.preventDefault()
+                  scrollToSection(link.href)
+                }}
+              >
                 {link.label}
               </a>
             ))}
@@ -162,7 +186,15 @@ export default function LandingPage(_props: LandingPageProps) {
               exit={{ opacity: 0, height: 0 }}
             >
               {navLinks.map((link) => (
-                <a key={link.label} href={link.href} className="mobile-nav-link" onClick={() => setMenuOpen(false)}>
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="mobile-nav-link"
+                  onClick={(event) => {
+                    event.preventDefault()
+                    scrollToSection(link.href)
+                  }}
+                >
                   {link.label}
                 </a>
               ))}
@@ -439,9 +471,12 @@ export default function LandingPage(_props: LandingPageProps) {
                     </li>
                   ))}
                 </ul>
-                <Link to="/dashboard" className={plan.highlight ? 'primary-button pricing-button' : 'secondary-button pricing-button'}>
+                <button
+                  type="button"
+                  className={plan.highlight ? 'primary-button pricing-button' : 'secondary-button pricing-button'}
+                >
                   Get Started
-                </Link>
+                </button>
               </motion.article>
             ))}
           </div>
@@ -478,49 +513,6 @@ export default function LandingPage(_props: LandingPageProps) {
         </section>
       </main>
 
-      <footer id="contact" className="landing-footer">
-        <div className="section-frame footer-frame">
-          <div>
-            <Link to="/" className="brand-mark">
-              <span className="brand-icon">
-                <Activity size={18} />
-              </span>
-              <span className="brand-text">MediQo</span>
-            </Link>
-            <p className="footer-copy">
-              Elegant AI healthcare for connected clinics, modern families, and calmer care journeys.
-            </p>
-          </div>
-
-          <div className="footer-links">
-            <a href="#features">Features</a>
-            <a href="#about">About</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#faq">FAQ</a>
-          </div>
-
-          <form className="newsletter-card glass-card">
-            <label htmlFor="newsletter">Newsletter</label>
-            <div className="newsletter-row">
-              <input id="newsletter" type="email" placeholder="Enter your email" />
-              <button type="button" className="primary-button">
-                Join
-              </button>
-            </div>
-            <div className="social-row">
-              <a href="https://dribbble.com" target="_blank" rel="noreferrer">
-                Dribbble
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer">
-                LinkedIn
-              </a>
-              <a href="https://x.com" target="_blank" rel="noreferrer">
-                X
-              </a>
-            </div>
-          </form>
-        </div>
-      </footer>
     </div>
   )
 }

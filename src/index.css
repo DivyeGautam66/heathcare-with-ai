@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Sora:wght@600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -41,7 +42,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', 'Outfit', system-ui, sans-serif;
+  font-family: 'Manrope', 'Inter', system-ui, sans-serif;
   background-color: var(--bg);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -525,7 +526,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.7rem 0;
+  padding: 0.85rem 0;
   border-radius: 0;
   background: transparent;
   border: 0;
@@ -535,27 +536,29 @@ body {
 .brand-mark {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.95rem;
   color: var(--landing-text);
   text-decoration: none;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-weight: 800;
+  letter-spacing: -0.045em;
 }
 
 .brand-icon {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 3.15rem;
+  height: 3.15rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 16px;
+  border-radius: 18px;
   color: white;
-  background: linear-gradient(135deg, var(--landing-primary-strong), #8cc7ff);
-  box-shadow: 0 16px 32px rgba(102, 177, 157, 0.28);
+  background: linear-gradient(135deg, #65c6b1, #79c2ef);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 18px 32px rgba(102, 177, 157, 0.22);
 }
 
 .brand-text {
-  font-size: 1.1rem;
+  font-family: 'Sora', 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: -0.05em;
 }
 
 .nav-desktop,
@@ -579,12 +582,12 @@ body {
 }
 
 .nav-desktop {
-  gap: 1.5rem;
-  padding: 0.78rem 1.4rem;
+  gap: 0.45rem;
+  padding: 0.42rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.32);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 10px 30px rgba(109, 160, 149, 0.08);
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 14px 34px rgba(109, 160, 149, 0.1);
 }
 
 .nav-link,
@@ -592,8 +595,20 @@ body {
 .social-row a {
   color: var(--landing-muted);
   text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.2s ease;
+  font-size: 0.92rem;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.nav-link {
+  padding: 0.8rem 1.22rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.52);
+  transform: translateY(-1px);
 }
 
 .nav-link:hover,
@@ -603,7 +618,7 @@ body {
 }
 
 .nav-actions {
-  gap: 0.75rem;
+  gap: 0.7rem;
 }
 
 .primary-button,
@@ -624,13 +639,16 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.35rem;
+  padding: 0.74rem 1.32rem;
+  min-height: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
 }
 
 .primary-button {
   color: white;
-  background: linear-gradient(135deg, var(--landing-primary-strong), #8fcbf0);
-  box-shadow: 0 16px 30px rgba(109, 182, 166, 0.28);
+  background: linear-gradient(135deg, rgba(76, 176, 157, 0.92), rgba(125, 195, 238, 0.9));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 10px 22px rgba(109, 182, 166, 0.18);
 }
 
 .primary-button:hover,
@@ -643,9 +661,9 @@ body {
 .ghost-button,
 .mobile-menu-button {
   color: var(--landing-text);
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.28);
   border-color: rgba(255, 255, 255, 0.34);
-  box-shadow: 0 10px 24px rgba(109, 160, 149, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 8px 18px rgba(109, 160, 149, 0.08);
 }
 
 .mobile-menu-button {
