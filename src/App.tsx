@@ -8,7 +8,6 @@ import Analytics from './pages/Analytics'
 import PatientProfile from './pages/PatientProfile'
 import Telemedicine from './pages/Telemedicine'
 import AdminDashboard from './pages/AdminDashboard'
-import SOSButton from './components/SOSButton'
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false)
@@ -34,7 +33,6 @@ export default function App() {
           <Route path="/admin" element={<AdminDashboard />} />
         </Route>
       </Routes>
-      <SOSButton />
     </div>
   )
 }

@@ -140,7 +140,7 @@ export default function LandingPage(_props: LandingPageProps) {
             <span className="brand-icon">
               <Activity size={18} />
             </span>
-            <span className="brand-text">MediQo</span>
+            <span className="brand-text">MedtriageAi</span>
           </Link>
 
           <div className="nav-desktop">
