@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Video, Star, Clock, Calendar, CheckCircle, Wifi } from 'lucide-react'
+import { Video, Star, Calendar, Wifi } from 'lucide-react'
 
 const doctors = [
   { name: 'Dr. Priya Patel', specialty: 'Cardiologist', rating: 4.9, reviews: 312, available: true, fee: '$85', avatar: 'PP', color: '#2563EB', next: 'Available now' },

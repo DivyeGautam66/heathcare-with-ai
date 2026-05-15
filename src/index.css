@@ -432,10 +432,1116 @@ body {
   overflow: hidden;
 }
 
+/* Landing page */
+.landing-shell {
+  --landing-bg: #eef8f3;
+  --landing-surface: rgba(255, 255, 255, 0.7);
+  --landing-surface-strong: rgba(255, 255, 255, 0.9);
+  --landing-border: rgba(135, 202, 184, 0.28);
+  --landing-shadow: 0 24px 80px rgba(96, 153, 141, 0.14);
+  --landing-text: #16312d;
+  --landing-muted: #5b7772;
+  --landing-primary: #7ccfbe;
+  --landing-primary-strong: #4daf9b;
+  --landing-secondary: #dff7ef;
+  position: relative;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(167, 230, 214, 0.55), transparent 30%),
+    radial-gradient(circle at top right, rgba(191, 227, 255, 0.45), transparent 24%),
+    linear-gradient(180deg, #f8fdfb 0%, var(--landing-bg) 55%, #f7fbfa 100%);
+  color: var(--landing-text);
+}
+
+.landing-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(118, 173, 160, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(118, 173, 160, 0.08) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at center, black 45%, transparent 90%);
+  pointer-events: none;
+}
+
+.landing-orb {
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(20px);
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.landing-orb-a {
+  top: 8rem;
+  left: -5rem;
+  width: 18rem;
+  height: 18rem;
+  background: rgba(157, 232, 213, 0.5);
+}
+
+.landing-orb-b {
+  right: 4rem;
+  top: 28rem;
+  width: 22rem;
+  height: 22rem;
+  background: rgba(198, 234, 255, 0.45);
+}
+
+.landing-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.landing-nav,
+.mobile-menu,
+.section-frame,
+.glass-card,
+.glass-panel {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.landing-nav,
+.mobile-menu,
+.section-frame,
+.glass-card,
+.glass-panel,
+.newsletter-card {
+  background: var(--landing-surface);
+  border: 1px solid var(--landing-border);
+  box-shadow: var(--landing-shadow);
+}
+
+.landing-nav {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 1.25rem;
+  border-radius: 26px;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--landing-text);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.brand-icon {
+  width: 2.6rem;
+  height: 2.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  color: white;
+  background: linear-gradient(135deg, var(--landing-primary-strong), #8cc7ff);
+  box-shadow: 0 16px 32px rgba(102, 177, 157, 0.28);
+}
+
+.brand-text {
+  font-size: 1.1rem;
+}
+
+.nav-desktop,
+.nav-actions,
+.hero-actions,
+.hero-proof,
+.tag-row,
+.panel-header,
+.doctor-chip,
+.call-actions,
+.benefit-list,
+.pricing-value,
+.testimonial-top,
+.newsletter-row,
+.social-row,
+.footer-links,
+.billing-toggle,
+.faq-question {
+  display: flex;
+  align-items: center;
+}
+
+.nav-desktop {
+  gap: 1.5rem;
+}
+
+.nav-link,
+.footer-links a,
+.social-row a {
+  color: var(--landing-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.footer-links a:hover,
+.social-row a:hover {
+  color: var(--landing-text);
+}
+
+.nav-actions {
+  gap: 0.75rem;
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button,
+.mobile-menu-button {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.35rem;
+}
+
+.primary-button {
+  color: white;
+  background: linear-gradient(135deg, var(--landing-primary-strong), #8fcbf0);
+  box-shadow: 0 16px 30px rgba(109, 182, 166, 0.28);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.ghost-button:hover {
+  transform: translateY(-2px);
+}
+
+.secondary-button,
+.ghost-button,
+.mobile-menu-button {
+  color: var(--landing-text);
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(161, 206, 194, 0.36);
+}
+
+.mobile-menu-button {
+  display: none;
+  width: 2.8rem;
+  height: 2.8rem;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  max-width: 1280px;
+  margin: 0.75rem auto 0;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  color: var(--landing-text);
+  border-top: 1px solid rgba(161, 206, 194, 0.22);
+}
+
+.hero-section,
+.landing-section,
+.landing-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-section {
+  padding: 2rem 1.25rem 1rem;
+}
+
+.section-frame,
+.landing-section,
+.landing-footer {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.hero-frame {
+  border-radius: 40px;
+  padding: 4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 3rem;
+  overflow: hidden;
+}
+
+.hero-copy h1 {
+  max-width: 11ch;
+  margin-top: 1rem;
+  font-size: clamp(3rem, 6vw, 5.7rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.hero-copy p,
+.section-copy p,
+.section-heading h2,
+.feature-card p,
+.pricing-card p,
+.testimonial-card p,
+.testimonial-card blockquote,
+.footer-copy,
+.faq-item p {
+  color: var(--landing-muted);
+}
+
+.hero-copy > p {
+  max-width: 36rem;
+  margin-top: 1.35rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.eyebrow-pill,
+.card-badge,
+.pricing-label,
+.section-heading span,
+.section-copy span,
+.stat-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(161, 206, 194, 0.28);
+  color: var(--landing-primary-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.hero-actions {
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero-primary {
+  padding-inline: 1.6rem;
+}
+
+.hero-proof {
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.avatar-stack {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-stack span,
+.testimonial-avatar,
+.doctor-avatar {
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8fd8c7, #99bffe);
+}
+
+.avatar-stack span {
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  margin-left: -0.55rem;
+}
+
+.avatar-stack span:first-child {
+  margin-left: 0;
+}
+
+.hero-proof p {
+  max-width: 24rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.hero-visual {
+  position: relative;
+  min-height: 38rem;
+}
+
+.glass-card,
+.glass-panel {
+  border-radius: 32px;
+}
+
+.glass-panel {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.62));
+}
+
+.dashboard-panel {
+  position: absolute;
+  inset: 6rem 5rem 4rem 2rem;
+  padding: 1.7rem;
+}
+
+.panel-header {
+  justify-content: space-between;
+  font-size: 0.84rem;
+  color: var(--landing-muted);
+}
+
+.dashboard-panel h3,
+.feature-card h3,
+.pricing-card h3,
+.testimonial-card h3,
+.science-card h3 {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  letter-spacing: -0.04em;
+}
+
+.dashboard-panel p {
+  margin-top: 0.8rem;
+  line-height: 1.7;
+  color: var(--landing-muted);
+}
+
+.tag-row {
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: 1.3rem;
+}
+
+.tag-row span {
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(124, 207, 190, 0.12);
+  color: #36766b;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.mini-chart {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: end;
+  gap: 0.65rem;
+  height: 8rem;
+  margin-top: 1.8rem;
+}
+
+.mini-chart div {
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(124, 207, 190, 0.2), rgba(124, 207, 190, 0.8));
+}
+
+.mini-chart div:nth-child(1) { height: 35%; }
+.mini-chart div:nth-child(2) { height: 72%; }
+.mini-chart div:nth-child(3) { height: 46%; }
+.mini-chart div:nth-child(4) { height: 82%; }
+.mini-chart div:nth-child(5) { height: 58%; }
+.mini-chart div:nth-child(6) { height: 92%; }
+
+.floating-card {
+  position: absolute;
+  padding: 1rem;
+}
+
+.top-card {
+  top: 1rem;
+  right: 0;
+  width: 14rem;
+}
+
+.side-card {
+  left: 0;
+  bottom: 9rem;
+  width: 11rem;
+}
+
+.bottom-card {
+  right: 1rem;
+  bottom: 1rem;
+  width: 17rem;
+}
+
+.visual-swirl {
+  height: 8.5rem;
+  margin-top: 0.9rem;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(135, 242, 218, 0.8), transparent 28%),
+    radial-gradient(circle at 65% 42%, rgba(126, 170, 255, 0.55), transparent 25%),
+    radial-gradient(circle at 50% 70%, rgba(18, 104, 83, 0.24), transparent 20%),
+    linear-gradient(135deg, #153d3b, #7bd8c4);
+}
+
+.top-card p,
+.side-card p {
+  margin-top: 0.8rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.stat-value {
+  margin-top: 0.55rem;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.doctor-chip {
+  gap: 0.85rem;
+}
+
+.doctor-avatar {
+  width: 2.9rem;
+  height: 2.9rem;
+  flex-shrink: 0;
+}
+
+.doctor-avatar.large {
+  width: 4rem;
+  height: 4rem;
+}
+
+.doctor-chip strong,
+.consult-body strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.doctor-chip span,
+.consult-body p {
+  font-size: 0.82rem;
+  color: var(--landing-muted);
+}
+
+.call-actions {
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.call-actions button,
+.consult-header button {
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 0;
+  border-radius: 999px;
+  color: var(--landing-text);
+  background: rgba(255, 255, 255, 0.82);
+  cursor: pointer;
+}
+
+.dna-helix {
+  position: absolute;
+  inset: 2rem 2rem auto auto;
+  width: 8rem;
+  height: 22rem;
+  opacity: 0.38;
+}
+
+.dna-helix span {
+  position: absolute;
+  left: 50%;
+  width: 5rem;
+  height: 1rem;
+  border: 1px solid rgba(94, 154, 141, 0.35);
+  border-radius: 999px;
+  transform: translateX(-50%);
+}
+
+.dna-helix span:nth-child(1) { top: 0; }
+.dna-helix span:nth-child(2) { top: 2.6rem; width: 4rem; }
+.dna-helix span:nth-child(3) { top: 5.2rem; }
+.dna-helix span:nth-child(4) { top: 7.8rem; width: 4rem; }
+.dna-helix span:nth-child(5) { top: 10.4rem; }
+.dna-helix span:nth-child(6) { top: 13rem; width: 4rem; }
+.dna-helix span:nth-child(7) { top: 15.6rem; }
+.dna-helix span:nth-child(8) { top: 18.2rem; width: 4rem; }
+.dna-helix span:nth-child(9) { top: 20.8rem; }
+
+.landing-section {
+  padding: 1rem 1.25rem 4rem;
+}
+
+.section-heading {
+  max-width: 48rem;
+  margin-bottom: 2rem;
+}
+
+.section-heading h2,
+.section-copy h2 {
+  margin-top: 1rem;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+  color: var(--landing-text);
+}
+
+.feature-grid,
+.pricing-grid,
+.testimonial-grid {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.feature-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.feature-card {
+  padding: 1.5rem;
+}
+
+.feature-icon,
+.science-card svg {
+  color: var(--landing-primary-strong);
+}
+
+.feature-card p,
+.pricing-card p,
+.testimonial-card blockquote {
+  margin-top: 0.9rem;
+  line-height: 1.7;
+}
+
+.feature-card a {
+  margin-top: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--landing-text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.immersive-grid,
+.molecular-grid,
+.faq-layout,
+.footer-frame {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
+
+.section-copy p {
+  margin-top: 1rem;
+  line-height: 1.8;
+}
+
+.benefit-list {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.benefit-list div {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--landing-text);
+  font-weight: 600;
+}
+
+.experience-stage,
+.molecule-stage {
+  min-height: 32rem;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.experience-stage {
+  position: relative;
+}
+
+.experience-orbit {
+  position: absolute;
+  inset: 10% 16%;
+  border-radius: 50%;
+  border: 1px solid rgba(128, 186, 171, 0.22);
+}
+
+.headset-figure {
+  position: absolute;
+  left: 18%;
+  bottom: 13%;
+  width: 18rem;
+  height: 22rem;
+  border-radius: 10rem 10rem 5rem 5rem;
+  background: linear-gradient(180deg, #193936, #2e6660 65%, #98d7c9 100%);
+}
+
+.visor {
+  position: absolute;
+  top: 3.2rem;
+  left: 2.4rem;
+  right: 2.4rem;
+  height: 5.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(31, 88, 81, 0.95), rgba(170, 235, 255, 0.6));
+  border: 1px solid rgba(202, 245, 232, 0.45);
+  box-shadow: 0 18px 40px rgba(18, 49, 46, 0.28);
+}
+
+.pulse-one,
+.pulse-two {
+  position: absolute;
+  inset: 14% 10%;
+  border-radius: 50%;
+  border: 1px solid rgba(130, 210, 192, 0.2);
+}
+
+.pulse-two {
+  inset: 4% 0;
+}
+
+.consult-card {
+  position: absolute;
+  top: 14%;
+  right: 8%;
+  width: 16rem;
+  padding: 1rem;
+}
+
+.consult-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--landing-muted);
+  font-size: 0.85rem;
+}
+
+.consult-body {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.wave-bars {
+  display: flex;
+  align-items: end;
+  gap: 0.35rem;
+  height: 2.2rem;
+  margin-top: 1rem;
+}
+
+.wave-bars span {
+  width: 0.3rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #8fcbf0, var(--landing-primary-strong));
+  animation: waveform 1.3s ease-in-out infinite;
+}
+
+.wave-bars span:nth-child(1) { height: 35%; }
+.wave-bars span:nth-child(2) { height: 85%; animation-delay: 0.1s; }
+.wave-bars span:nth-child(3) { height: 45%; animation-delay: 0.2s; }
+.wave-bars span:nth-child(4) { height: 95%; animation-delay: 0.3s; }
+.wave-bars span:nth-child(5) { height: 60%; animation-delay: 0.4s; }
+
+.profile-floating {
+  position: absolute;
+  bottom: 12%;
+  right: 10%;
+  width: 11rem;
+  padding: 1rem;
+}
+
+.profile-floating strong {
+  display: block;
+  margin-top: 0.55rem;
+  font-size: 1.35rem;
+}
+
+.molecule-stage {
+  display: grid;
+  place-items: center;
+}
+
+.molecule-core {
+  position: relative;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.85) 0%, rgba(155, 225, 209, 0.68) 38%, rgba(91, 151, 140, 0.16) 100%);
+  box-shadow: inset 0 0 32px rgba(255, 255, 255, 0.5), 0 30px 60px rgba(100, 166, 152, 0.18);
+}
+
+.molecule-core::before,
+.molecule-core::after,
+.molecule-core span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7ccfbe, #8cc7ff);
+  box-shadow: 0 0 0 12px rgba(124, 207, 190, 0.08);
+  transform-origin: center -7.4rem;
+}
+
+.molecule-core::before,
+.molecule-core::after {
+  content: '';
+}
+
+.molecule-core::before {
+  transform: rotate(15deg) translateY(-118px);
+}
+
+.molecule-core::after {
+  transform: rotate(165deg) translateY(-118px);
+}
+
+.science-blocks {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.6rem;
+}
+
+.science-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.15rem 1.2rem;
+}
+
+.science-card p {
+  margin-top: 0.45rem;
+  line-height: 1.6;
+}
+
+.billing-toggle {
+  gap: 0.6rem;
+  width: fit-content;
+  margin: 0 auto 2rem;
+  padding: 0.45rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(161, 206, 194, 0.28);
+}
+
+.toggle-option {
+  padding: 0.7rem 1.2rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--landing-muted);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.toggle-option.active {
+  color: white;
+  background: linear-gradient(135deg, var(--landing-primary-strong), #8fcbf0);
+}
+
+.pricing-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pricing-card {
+  padding: 1.7rem;
+  border-radius: 32px;
+}
+
+.pricing-card.featured {
+  background: linear-gradient(180deg, rgba(94, 175, 159, 0.92), rgba(139, 199, 255, 0.85));
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  box-shadow: 0 24px 60px rgba(72, 151, 136, 0.28);
+}
+
+.pricing-card.featured p,
+.pricing-card.featured li,
+.pricing-card.featured .pricing-label,
+.pricing-card.featured .pricing-value span {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.pricing-card.featured .pricing-label {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.pricing-value {
+  gap: 0.25rem;
+  margin-top: 1rem;
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.pricing-value span {
+  margin-top: 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--landing-muted);
+}
+
+.pricing-card ul {
+  margin-top: 1.35rem;
+  list-style: none;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.pricing-card li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--landing-text);
+}
+
+.pricing-button {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.testimonial-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.testimonial-card {
+  padding: 1.5rem;
+}
+
+.testimonial-top {
+  gap: 0.95rem;
+}
+
+.testimonial-avatar {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.testimonial-card blockquote {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.faq-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.faq-item {
+  text-align: left;
+  padding: 1.3rem 1.35rem;
+  border-radius: 24px;
+  border: 1px solid rgba(161, 206, 194, 0.28);
+  background: rgba(255, 255, 255, 0.62);
+  cursor: pointer;
+}
+
+.faq-question {
+  justify-content: space-between;
+  color: var(--landing-text);
+  font-weight: 700;
+}
+
+.faq-item p {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease, margin-top 0.25s ease;
+}
+
+.faq-item.open p {
+  max-height: 8rem;
+  margin-top: 0.75rem;
+}
+
+.faq-item.open svg {
+  transform: rotate(90deg);
+}
+
+.landing-footer {
+  padding: 0 1.25rem 3rem;
+}
+
+.footer-frame {
+  padding: 2rem;
+  border-radius: 36px;
+}
+
+.footer-copy {
+  max-width: 22rem;
+  margin-top: 1rem;
+  line-height: 1.7;
+}
+
+.footer-links {
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.newsletter-card {
+  padding: 1.15rem;
+  border-radius: 28px;
+}
+
+.newsletter-card label {
+  display: block;
+  margin-bottom: 0.9rem;
+  font-weight: 700;
+}
+
+.newsletter-row {
+  gap: 0.75rem;
+}
+
+.newsletter-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(161, 206, 194, 0.28);
+  outline: none;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.social-row {
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
 /* Responsive */
+@media (max-width: 1100px) {
+  .hero-frame,
+  .immersive-grid,
+  .molecular-grid,
+  .faq-layout,
+  .footer-frame {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid,
+  .pricing-grid,
+  .testimonial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-copy h1 {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .btn-primary, .btn-secondary {
     padding: 0.65rem 1.25rem;
     font-size: 0.85rem;
+  }
+
+  .landing-header,
+  .hero-section,
+  .landing-section,
+  .landing-footer {
+    padding-inline: 0.9rem;
+  }
+
+  .landing-nav {
+    padding: 0.85rem 1rem;
+  }
+
+  .nav-desktop,
+  .nav-actions .ghost-button,
+  .nav-actions .primary-button {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: inline-flex;
+  }
+
+  .hero-frame,
+  .experience-stage,
+  .molecule-stage,
+  .footer-frame {
+    padding: 1.4rem;
+  }
+
+  .hero-visual {
+    min-height: 30rem;
+  }
+
+  .dashboard-panel {
+    inset: 4.8rem 1rem 5rem 1rem;
+  }
+
+  .top-card,
+  .side-card,
+  .bottom-card,
+  .consult-card,
+  .profile-floating {
+    width: auto;
+  }
+
+  .top-card {
+    top: 0.4rem;
+    right: 0.4rem;
+    left: 6rem;
+  }
+
+  .side-card {
+    left: 0.4rem;
+    bottom: 7rem;
+    right: 8rem;
+  }
+
+  .bottom-card {
+    right: 0.5rem;
+    left: 7rem;
+  }
+
+  .dna-helix {
+    display: none;
+  }
+
+  .feature-grid,
+  .pricing-grid,
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .headset-figure {
+    left: 6%;
+    width: 13rem;
+    height: 17rem;
+  }
+
+  .consult-card {
+    top: 9%;
+    right: 4%;
+  }
+
+  .profile-floating {
+    right: 5%;
+  }
+
+  .newsletter-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

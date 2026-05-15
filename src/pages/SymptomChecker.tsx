@@ -277,7 +277,7 @@ export default function SymptomChecker() {
           <button
             onClick={toggleVoice}
             style={{
-              width: '44px', height: '44px', borderRadius: '12px', border: 'none', cursor: 'pointer',
+              width: '44px', height: '44px', borderRadius: '12px', cursor: 'pointer',
               background: isListening ? '#EF4444' : 'var(--bg)',
               border: `2px solid ${isListening ? '#EF4444' : 'var(--border)'}`,
               color: isListening ? 'white' : 'var(--text-secondary)',

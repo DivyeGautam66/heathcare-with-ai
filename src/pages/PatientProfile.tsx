@@ -207,7 +207,7 @@ export default function PatientProfile() {
               </div>
               <div style={{ fontWeight: 600, fontSize: '0.85rem', color: 'var(--text-primary)' }}>{name}</div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>{type} · {date}</div>
-              <button style={{ marginTop: '0.75rem', background: 'none', border: 'none', cursor: 'pointer', color: '#2563EB', fontSize: '0.78rem', fontWeight: 600', padding: 0', display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
+              <button style={{ marginTop: '0.75rem', background: 'none', border: 'none', cursor: 'pointer', color: '#2563EB', fontSize: '0.78rem', fontWeight: 600, padding: 0, display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
                 <Download size={13} /> Download
               </button>
             </div>

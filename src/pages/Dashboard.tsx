@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Heart, Activity, Thermometer, Droplets, AlertTriangle, Brain, TrendingUp, Users, Clock, ArrowUpRight, ArrowDownRight, Home, Building2, Siren } from 'lucide-react'
+import { Heart, Activity, Thermometer, AlertTriangle, Brain, TrendingUp, Users, Clock, ArrowUpRight, ArrowDownRight, Home, Building2, Siren } from 'lucide-react'
 import { RadialBarChart, RadialBar, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 
 const vitals = [

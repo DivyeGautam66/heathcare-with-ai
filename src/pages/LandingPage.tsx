@@ -1,505 +1,611 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
-  Activity, Brain, Shield, Mic, Globe, Watch, Heart,
-  ChevronRight, Play, Users, Zap, Clock, ArrowRight,
-  CheckCircle, MessageSquare, BarChart3, Video, Moon, Sun
+  Activity,
+  ArrowRight,
+  Brain,
+  Check,
+  ChevronRight,
+  Cpu,
+  FlaskConical,
+  HeartPulse,
+  Menu,
+  MessageSquareHeart,
+  Microscope,
+  Play,
+  ShieldCheck,
+  Sparkles,
+  Stethoscope,
+  TestTube2,
+  Video,
+  Wind,
+  X,
 } from 'lucide-react'
 
-interface LandingProps {
-  darkMode: boolean
-  setDarkMode: (v: boolean) => void
+type LandingPageProps = {
+  darkMode?: boolean
+  setDarkMode?: (value: boolean) => void
 }
 
-const stats = [
-  { value: '2.4M+', label: 'Patients Assisted', icon: Users },
-  { value: '98.7%', label: 'Emergency Detection Rate', icon: Shield },
-  { value: '<2s', label: 'Average Response Time', icon: Clock },
-  { value: '156', label: 'Hospital Partners', icon: Heart },
+const navLinks = [
+  { label: 'Home', href: '#home' },
+  { label: 'Features', href: '#features' },
+  { label: 'About', href: '#about' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Contact', href: '#contact' },
 ]
 
-const features = [
-  { icon: Brain, title: 'NLP Symptom Analysis', desc: 'Advanced natural language processing understands complex symptom descriptions with clinical accuracy.', color: '#2563EB' },
-  { icon: Shield, title: 'AI Risk Prediction', desc: 'Machine learning models trained on millions of cases predict health risks before they become critical.', color: '#14B8A6' },
-  { icon: Zap, title: 'Emergency Detection', desc: 'Real-time monitoring flags emergency conditions instantly, triggering immediate response protocols.', color: '#EF4444' },
-  { icon: Video, title: 'Telemedicine Integration', desc: 'Connect patients with certified physicians within minutes through secure video consultations.', color: '#8B5CF6' },
-  { icon: Mic, title: 'Voice Assistant', desc: 'Hands-free symptom reporting with AI-powered voice recognition for accessibility.', color: '#F59E0B' },
-  { icon: Globe, title: 'Multilingual Support', desc: 'Healthcare guidance in 40+ languages ensuring no patient is left behind.', color: '#10B981' },
-  { icon: Watch, title: 'Wearable Integration', desc: 'Real-time data from smartwatches and medical devices for continuous health monitoring.', color: '#EC4899' },
-  { icon: Heart, title: 'Mental Health Assessment', desc: 'Comprehensive mental wellness screening with evidence-based assessment tools.', color: '#6366F1' },
+const aiCards = [
+  {
+    title: 'Mental Health Counseling',
+    description: 'Private AI-guided care plans with therapist-ready summaries.',
+    icon: MessageSquareHeart,
+  },
+  {
+    title: 'Cholesterol Levels',
+    description: 'Continuous biomarker scoring with personalized prevention insights.',
+    icon: HeartPulse,
+  },
+  {
+    title: 'Lung Function Test',
+    description: 'Breathing analytics and remote respiratory risk detection in seconds.',
+    icon: Wind,
+  },
+  {
+    title: 'At-home Lab Tests',
+    description: 'Connected diagnostics kits with intelligent follow-up and reminders.',
+    icon: TestTube2,
+  },
 ]
 
-const HeartbeatLine = () => (
-  <svg viewBox="0 0 1440 120" style={{ width: '100%', opacity: 0.12 }} fill="none">
-    <path
-      d="M0,60 L200,60 L240,10 L280,110 L320,10 L360,110 L400,60 L700,60 L740,10 L780,110 L820,10 L860,110 L900,60 L1200,60 L1240,10 L1280,110 L1320,10 L1360,110 L1440,60"
-      stroke="#2563EB"
-      strokeWidth="3"
-      className="heartbeat-svg"
-      style={{ strokeDasharray: '2000', strokeDashoffset: '2000', animation: 'dash 4s linear infinite' }}
-    />
-  </svg>
-)
+const planFeatures = [
+  {
+    name: 'Essential',
+    monthly: '$29',
+    yearly: '$19',
+    description: 'For individuals beginning their AI-supported health journey.',
+    features: ['AI symptom triage', '2 video consultations', 'Health timeline', 'Smart lab reminders'],
+    highlight: false,
+  },
+  {
+    name: 'Premium',
+    monthly: '$79',
+    yearly: '$59',
+    description: 'Best for proactive care, prevention, and specialist coordination.',
+    features: ['Unlimited AI check-ins', 'Priority doctor access', 'Advanced analytics', 'Family health dashboard'],
+    highlight: true,
+  },
+  {
+    name: 'Enterprise',
+    monthly: '$149',
+    yearly: '$119',
+    description: 'For clinics and care networks delivering futuristic patient experiences.',
+    features: ['Multi-user roles', 'Custom workflows', 'Population health insights', 'Dedicated success support'],
+    highlight: false,
+  },
+]
 
-export default function LandingPage({ darkMode, setDarkMode }: LandingProps) {
+const testimonials = [
+  {
+    name: 'Maya Chen',
+    role: 'Wellness Member',
+    quote: 'It feels like Apple designed healthcare for modern families. Every interaction is calm, clear, and incredibly smart.',
+  },
+  {
+    name: 'Dr. Elias Noor',
+    role: 'Clinical Advisor',
+    quote: 'The pre-consultation AI summaries save time and improve the quality of every remote visit we run.',
+  },
+  {
+    name: 'Nina Patel',
+    role: 'Remote Patient',
+    quote: 'Lab tracking, video care, and mental wellness all live in one elegant flow. It genuinely reduced my care anxiety.',
+  },
+]
+
+const faqItems = [
+  {
+    question: 'How does the AI assist with care?',
+    answer: 'It organizes health signals, surfaces possible risks, and helps clinicians make faster, better-informed decisions.',
+  },
+  {
+    question: 'Can patients use this for remote diagnostics?',
+    answer: 'Yes. The platform supports at-home tests, wearable input, and secure video follow-ups in one connected experience.',
+  },
+  {
+    question: 'Is this suitable for clinics and enterprises?',
+    answer: 'Yes. Premium and Enterprise plans support collaboration, analytics, and workflows for growing care teams.',
+  },
+]
+
+const fadeUp = {
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.25 },
+  transition: { duration: 0.7, ease: 'easeOut' as const },
+}
+
+export default function LandingPage(_props: LandingPageProps) {
+  const [yearly, setYearly] = useState(true)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [openFaq, setOpenFaq] = useState(0)
+
   return (
-    <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-      {/* Navbar */}
-      <nav style={{
-        position: 'sticky', top: 0, zIndex: 100,
-        background: 'rgba(248,250,252,0.85)',
-        backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid var(--border)',
-        padding: '0 5%',
-        height: '68px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '1rem',
-      }} className={darkMode ? 'dark' : ''}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <div style={{
-            width: '38px', height: '38px', borderRadius: '11px',
-            background: 'linear-gradient(135deg, #2563EB, #14B8A6)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <Activity size={21} color="white" />
+    <div className="landing-shell">
+      <div className="landing-orb landing-orb-a" />
+      <div className="landing-orb landing-orb-b" />
+      <div className="landing-grid" />
+
+      <header className="landing-header">
+        <nav className="landing-nav">
+          <Link to="/" className="brand-mark">
+            <span className="brand-icon">
+              <Activity size={18} />
+            </span>
+            <span className="brand-text">MediQo</span>
+          </Link>
+
+          <div className="nav-desktop">
+            {navLinks.map((link) => (
+              <a key={link.label} href={link.href} className="nav-link">
+                {link.label}
+              </a>
+            ))}
           </div>
-          <span style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--text-primary)', fontFamily: 'Outfit' }}>
-            Medi<span style={{ color: '#2563EB' }}>AI</span>
-          </span>
-        </div>
 
-        <div style={{ display: 'flex', gap: '2rem', marginLeft: '3rem', display: 'none' }} className="nav-links">
-          {['Features', 'Solutions', 'Pricing', 'About'].map(item => (
-            <a key={item} href="#" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500, transition: 'color 0.2s' }}>{item}</a>
-          ))}
-        </div>
+          <div className="nav-actions">
+            <Link to="/dashboard" className="ghost-button">
+              Login
+            </Link>
+            <Link to="/symptom-checker" className="primary-button">
+              Get Started
+            </Link>
+            <button
+              type="button"
+              className="mobile-menu-button"
+              onClick={() => setMenuOpen((value) => !value)}
+              aria-label="Toggle navigation"
+            >
+              {menuOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
+          </div>
+        </nav>
 
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            style={{
-              background: 'var(--surface)', border: '1px solid var(--border)',
-              borderRadius: '10px', padding: '0.5rem', cursor: 'pointer',
-              color: 'var(--text-secondary)', display: 'flex', alignItems: 'center'
-            }}
-          >
-            {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
-          <Link to="/dashboard" style={{ textDecoration: 'none' }}>
-            <button className="btn-secondary" style={{ padding: '0.55rem 1.25rem' }}>Sign In</button>
-          </Link>
-          <Link to="/symptom-checker" style={{ textDecoration: 'none' }}>
-            <button className="btn-primary" style={{ padding: '0.55rem 1.25rem' }}>Get Started</button>
-          </Link>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section style={{
-        position: 'relative',
-        minHeight: '90vh',
-        display: 'flex',
-        alignItems: 'center',
-        overflow: 'hidden',
-        padding: '5rem 5%',
-      }}>
-        {/* BG decorations */}
-        <div style={{
-          position: 'absolute', top: '-200px', right: '-200px',
-          width: '600px', height: '600px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute', bottom: '-100px', left: '-100px',
-          width: '400px', height: '400px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(20,184,166,0.08) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
-          <HeartbeatLine />
-        </div>
-
-        <div style={{ maxWidth: '1280px', margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
-          {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              background: 'rgba(37,99,235,0.08)', border: '1px solid rgba(37,99,235,0.2)',
-              borderRadius: '100px', padding: '0.4rem 1rem', marginBottom: '1.5rem'
-            }}>
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10B981', animation: 'blink 2s infinite' }} />
-              <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#2563EB' }}>AI-Powered Healthcare Platform</span>
-            </div>
-
-            <h1 style={{
-              fontSize: 'clamp(2.5rem, 5vw, 3.75rem)',
-              fontWeight: 900,
-              lineHeight: 1.1,
-              color: 'var(--text-primary)',
-              fontFamily: 'Outfit',
-              marginBottom: '1.25rem',
-            }}>
-              AI-Powered{' '}
-              <span className="gradient-text">Healthcare</span>{' '}
-              Triage Assistant
-            </h1>
-
-            <p style={{
-              fontSize: '1.1rem',
-              lineHeight: 1.7,
-              color: 'var(--text-secondary)',
-              marginBottom: '2rem',
-              maxWidth: '520px',
-            }}>
-              Intelligent symptom analysis, emergency detection, and healthcare guidance powered by AI. Trusted by 2,400+ hospitals worldwide.
-            </p>
-
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
-              <Link to="/symptom-checker" style={{ textDecoration: 'none' }}>
-                <motion.button
-                  className="btn-primary"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  style={{ fontSize: '1rem', padding: '0.85rem 2rem' }}
-                >
-                  <Activity size={18} />
-                  Start Health Assessment
-                </motion.button>
-              </Link>
-              <motion.button
-                className="btn-secondary"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                style={{ fontSize: '1rem', padding: '0.85rem 2rem' }}
-                onClick={() => alert('Demo video coming soon!')}
-              >
-                <Play size={18} />
-                Watch Demo
-              </motion.button>
-            </div>
-
-            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-              {['HIPAA Compliant', 'FDA Cleared AI', '24/7 Monitoring'].map(badge => (
-                <div key={badge} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <CheckCircle size={15} color="#10B981" />
-                  <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{badge}</span>
-                </div>
+        <AnimatePresence>
+          {menuOpen ? (
+            <motion.div
+              className="mobile-menu"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+            >
+              {navLinks.map((link) => (
+                <a key={link.label} href={link.href} className="mobile-nav-link" onClick={() => setMenuOpen(false)}>
+                  {link.label}
+                </a>
               ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+      </header>
 
-          {/* Right — AI Healthcare Illustration */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            style={{ display: 'flex', justifyContent: 'center' }}
-          >
-            <div style={{ position: 'relative', width: '100%', maxWidth: '500px' }}>
-              {/* Main card */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                style={{
-                  background: 'var(--surface)',
-                  borderRadius: '24px',
-                  padding: '2rem',
-                  boxShadow: '0 20px 60px rgba(37,99,235,0.15)',
-                  border: '1px solid var(--border)',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                  <div style={{
-                    width: '48px', height: '48px', borderRadius: '14px',
-                    background: 'linear-gradient(135deg, #2563EB, #14B8A6)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center'
-                  }}>
-                    <Brain size={24} color="white" />
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>AI Analysis Complete</div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Patient #PA-2847 · Just now</div>
-                  </div>
-                  <div style={{ marginLeft: 'auto' }}>
-                    <span className="badge badge-high">High Risk</span>
-                  </div>
-                </div>
-
-                {/* Vitals */}
-                {[
-                  { label: 'Heart Rate', value: '112 bpm', color: '#EF4444', bar: 78 },
-                  { label: 'SpO₂', value: '94%', color: '#F59E0B', bar: 94 },
-                  { label: 'Blood Pressure', value: '148/92', color: '#8B5CF6', bar: 65 },
-                  { label: 'Temperature', value: '38.9°C', color: '#14B8A6', bar: 72 },
-                ].map(({ label, value, color, bar }) => (
-                  <div key={label} style={{ marginBottom: '0.85rem' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
-                      <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{label}</span>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color }}>{value}</span>
-                    </div>
-                    <div style={{ height: '6px', borderRadius: '3px', background: 'var(--border)', overflow: 'hidden' }}>
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${bar}%` }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        style={{ height: '100%', borderRadius: '3px', background: color }}
-                      />
-                    </div>
-                  </div>
-                ))}
-
-                <div className="emergency-banner" style={{ marginTop: '1rem' }}>
-                  <Shield size={18} color="#EF4444" />
-                  <div>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#DC2626' }}>Emergency Detected</div>
-                    <div style={{ fontSize: '0.75rem', color: '#EF4444' }}>Possible cardiac event — immediate care required</div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Floating badges */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                style={{
-                  position: 'absolute', top: '-20px', right: '-30px',
-                  background: 'var(--surface)', borderRadius: '14px',
-                  padding: '0.75rem 1rem', boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
-                  border: '1px solid var(--border)',
-                  display: 'flex', alignItems: 'center', gap: '0.5rem'
-                }}
-              >
-                <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(16,185,129,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Activity size={16} color="#10B981" />
-                </div>
-                <div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>AI Accuracy</div>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#10B981' }}>98.7%</div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                style={{
-                  position: 'absolute', bottom: '-20px', left: '-30px',
-                  background: 'var(--surface)', borderRadius: '14px',
-                  padding: '0.75rem 1rem', boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
-                  border: '1px solid var(--border)',
-                  display: 'flex', alignItems: 'center', gap: '0.5rem'
-                }}
-              >
-                <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(37,99,235,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Users size={16} color="#2563EB" />
-                </div>
-                <div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Today's Patients</div>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#2563EB' }}>1,247</div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section style={{ padding: '4rem 5%', background: 'var(--surface)' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
-            {stats.map(({ value, label, icon: Icon }, i) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                style={{ textAlign: 'center' }}
-              >
-                <div style={{
-                  width: '56px', height: '56px', borderRadius: '16px',
-                  background: 'linear-gradient(135deg, rgba(37,99,235,0.1), rgba(20,184,166,0.1))',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  margin: '0 auto 1rem'
-                }}>
-                  <Icon size={24} color="#2563EB" />
-                </div>
-                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--text-primary)', fontFamily: 'Outfit', lineHeight: 1 }}>{value}</div>
-                <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '0.4rem', fontWeight: 500 }}>{label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" style={{ padding: '6rem 5%' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{ textAlign: 'center', marginBottom: '4rem' }}
-          >
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              background: 'rgba(37,99,235,0.08)', border: '1px solid rgba(37,99,235,0.2)',
-              borderRadius: '100px', padding: '0.4rem 1rem', marginBottom: '1rem'
-            }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#2563EB' }}>Platform Features</span>
-            </div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'Outfit' }}>
-              Everything you need for <span className="gradient-text">smart healthcare</span>
-            </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', marginTop: '0.75rem', maxWidth: '600px', margin: '0.75rem auto 0' }}>
-              Our AI platform integrates seamlessly with existing healthcare infrastructure to deliver intelligent triage at scale.
-            </p>
-          </motion.div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-            {features.map(({ icon: Icon, title, desc, color }, i) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -6 }}
-                className="glass-card"
-                style={{ borderRadius: '20px', padding: '1.75rem', cursor: 'default' }}
-              >
-                <div style={{
-                  width: '52px', height: '52px', borderRadius: '14px',
-                  background: `${color}15`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginBottom: '1.25rem'
-                }}>
-                  <Icon size={24} color={color} />
-                </div>
-                <h3 style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--text-primary)', marginBottom: '0.5rem', fontFamily: 'Outfit' }}>{title}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>{desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section style={{ padding: '5rem 5%', background: 'var(--surface)' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            style={{
-              background: 'linear-gradient(135deg, #1E3A8A, #0F766E)',
-              borderRadius: '28px',
-              padding: '4rem 3rem',
-              position: 'relative',
-              overflow: 'hidden',
-            }}
-          >
-            <div style={{
-              position: 'absolute', top: '-60px', right: '-60px',
-              width: '200px', height: '200px', borderRadius: '50%',
-              background: 'rgba(255,255,255,0.06)'
-            }} />
-            <div style={{
-              position: 'absolute', bottom: '-40px', left: '-40px',
-              width: '150px', height: '150px', borderRadius: '50%',
-              background: 'rgba(255,255,255,0.04)'
-            }} />
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', fontWeight: 900, color: 'white', fontFamily: 'Outfit', marginBottom: '1rem' }}>
-              Ready to transform healthcare triage?
-            </h2>
-            <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1.05rem', marginBottom: '2.5rem', maxWidth: '600px', margin: '0 auto 2.5rem' }}>
-              Join thousands of healthcare providers using MediAI to deliver faster, smarter, and more accurate patient care.
-            </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/symptom-checker" style={{ textDecoration: 'none' }}>
-                <motion.button
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  style={{
-                    background: 'white', color: '#1E3A8A',
-                    padding: '0.9rem 2.25rem', borderRadius: '12px',
-                    fontWeight: 700, border: 'none', cursor: 'pointer',
-                    fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem'
-                  }}
-                >
-                  <Activity size={18} />
-                  Start Free Trial
-                  <ArrowRight size={16} />
-                </motion.button>
-              </Link>
-              <Link to="/dashboard" style={{ textDecoration: 'none' }}>
-                <motion.button
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  style={{
-                    background: 'rgba(255,255,255,0.15)', color: 'white',
-                    padding: '0.9rem 2.25rem', borderRadius: '12px',
-                    fontWeight: 700, border: '2px solid rgba(255,255,255,0.3)', cursor: 'pointer',
-                    fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem'
-                  }}
-                >
-                  <BarChart3 size={18} />
-                  View Dashboard
-                </motion.button>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer style={{ background: '#0F172A', color: 'rgba(255,255,255,0.7)', padding: '3rem 5% 2rem' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-                <div style={{
-                  width: '36px', height: '36px', borderRadius: '10px',
-                  background: 'linear-gradient(135deg, #2563EB, #14B8A6)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center'
-                }}>
-                  <Activity size={20} color="white" />
-                </div>
-                <span style={{ fontWeight: 800, fontSize: '1.2rem', color: 'white', fontFamily: 'Outfit' }}>MediAI</span>
+      <main>
+        <section id="home" className="hero-section">
+          <div className="section-frame hero-frame">
+            <motion.div {...fadeUp} className="hero-copy">
+              <div className="eyebrow-pill">
+                <Sparkles size={14} />
+                AI-powered healthcare operating system
               </div>
-              <p style={{ fontSize: '0.85rem', lineHeight: 1.7, maxWidth: '220px' }}>
-                AI-powered healthcare triage system trusted by hospitals worldwide.
+              <h1>
+                Revolutionizing Global Healthcare with AI: Connect, Heal, Thrive
+              </h1>
+              <p>
+                A futuristic care experience blending precision diagnostics, immersive doctor visits,
+                and calm, beautifully designed patient journeys.
               </p>
-            </div>
-            {[
-              { heading: 'Product', links: ['AI Symptom Checker', 'Risk Assessment', 'Telemedicine', 'Analytics'] },
-              { heading: 'Company', links: ['About Us', 'Careers', 'Blog', 'Contact'] },
-              { heading: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'HIPAA Compliance', 'Cookie Policy'] },
-            ].map(({ heading, links }) => (
-              <div key={heading}>
-                <h4 style={{ fontWeight: 700, color: 'white', marginBottom: '1rem', fontSize: '0.9rem' }}>{heading}</h4>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  {links.map(l => (
-                    <a key={l} href="#" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', textDecoration: 'none', transition: 'color 0.2s' }}
-                       onMouseEnter={e => (e.currentTarget.style.color = 'white')}
-                       onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
-                    >{l}</a>
-                  ))}
+
+              <div className="hero-actions">
+                <Link to="/symptom-checker" className="primary-button hero-primary">
+                  Get Started
+                  <ArrowRight size={16} />
+                </Link>
+                <a href="#contact" className="secondary-button">
+                  Contact Us
+                </a>
+              </div>
+
+              <div className="hero-proof">
+                <div className="avatar-stack">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <p>Trusted by 167K+ users and modern care teams across global wellness programs.</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="hero-visual"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
+              <motion.div
+                className="glass-panel dashboard-panel"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <div className="panel-header">
+                  <span>AI Powered</span>
+                  <span>Live</span>
+                </div>
+                <h3>Connected health dashboard</h3>
+                <p>Clinical triage, remote biometrics, and personalized care suggestions in one calm interface.</p>
+                <div className="tag-row">
+                  <span>Mental Health</span>
+                  <span>Lung Function</span>
+                  <span>Cholesterol</span>
+                  <span>At-home Lab</span>
+                </div>
+                <div className="mini-chart">
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="glass-card floating-card top-card"
+                animate={{ y: [0, -14, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+              >
+                <div className="card-badge">
+                  <Microscope size={14} />
+                  Microscopic insight
+                </div>
+                <div className="visual-swirl" />
+                <p>AI-enhanced scan quality with tissue pattern recognition.</p>
+              </motion.div>
+
+              <motion.div
+                className="glass-card floating-card side-card"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+              >
+                <div className="stat-kicker">Predictive care score</div>
+                <div className="stat-value">98.7%</div>
+                <p>Model confidence across respiratory and cardio screening.</p>
+              </motion.div>
+
+              <motion.div
+                className="glass-card floating-card bottom-card"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+              >
+                <div className="doctor-chip">
+                  <div className="doctor-avatar" />
+                  <div>
+                    <strong>Dr. Aaliyah Brooks</strong>
+                    <span>Now available for video consult</span>
+                  </div>
+                </div>
+                <div className="call-actions">
+                  <button type="button">
+                    <Video size={14} />
+                  </button>
+                  <button type="button">
+                    <Stethoscope size={14} />
+                  </button>
+                  <button type="button">
+                    <Brain size={14} />
+                  </button>
+                </div>
+              </motion.div>
+
+              <div className="dna-helix" aria-hidden="true">
+                {Array.from({ length: 9 }).map((_, index) => (
+                  <span key={index} />
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section id="features" className="landing-section">
+          <motion.div {...fadeUp} className="section-heading">
+            <span>AI Powered Healthcare</span>
+            <h2>Glassmorphism care modules designed to feel intelligent, light, and deeply human.</h2>
+          </motion.div>
+
+          <div className="feature-grid">
+            {aiCards.map((card, index) => {
+              const Icon = card.icon
+              return (
+                <motion.article
+                  key={card.title}
+                  className="feature-card glass-card"
+                  {...fadeUp}
+                  transition={{ ...fadeUp.transition, delay: index * 0.08 }}
+                  whileHover={{ y: -8, scale: 1.01 }}
+                >
+                  <div className="feature-icon">
+                    <Icon size={22} />
+                  </div>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                  <a href="#pricing">
+                    Explore module
+                    <ChevronRight size={16} />
+                  </a>
+                </motion.article>
+              )
+            })}
+          </div>
+        </section>
+
+        <section id="about" className="landing-section">
+          <div className="immersive-grid">
+            <motion.div {...fadeUp} className="section-copy">
+              <span>Immersive Doctor Experience</span>
+              <h2>Connect with your doctor in a next-generation consultation space.</h2>
+              <p>
+                Mixed-reality inspired care flows help patients feel guided before, during, and after
+                every appointment. From pre-visit symptom capture to live analytics overlays, the
+                experience stays warm instead of clinical.
+              </p>
+              <div className="benefit-list">
+                <div>
+                  <ShieldCheck size={18} />
+                  HIPAA-minded communication flows
+                </div>
+                <div>
+                  <Cpu size={18} />
+                  AI-assisted note generation
+                </div>
+                <div>
+                  <Video size={18} />
+                  Seamless video consultation controls
                 </div>
               </div>
+            </motion.div>
+
+            <motion.div {...fadeUp} className="experience-stage glass-panel">
+              <div className="experience-orbit" />
+              <div className="headset-figure">
+                <div className="visor" />
+                <div className="pulse-ring pulse-one" />
+                <div className="pulse-ring pulse-two" />
+              </div>
+
+              <div className="glass-card consult-card">
+                <div className="consult-header">
+                  <span>Live Consultation</span>
+                  <button type="button">
+                    <Play size={14} />
+                  </button>
+                </div>
+                <div className="consult-body">
+                  <div className="doctor-avatar large" />
+                  <div>
+                    <strong>Dr. Emily Stone</strong>
+                    <p>Respiratory Specialist</p>
+                  </div>
+                </div>
+                <div className="wave-bars">
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              </div>
+
+              <div className="glass-card profile-floating">
+                <p>Remote vitals synced</p>
+                <strong>SpO2 98%</strong>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="landing-section">
+          <div className="molecular-grid">
+            <motion.div {...fadeUp} className="molecule-stage glass-panel">
+              <div className="molecule-core">
+                {Array.from({ length: 12 }).map((_, index) => (
+                  <span key={index} style={{ transform: `rotate(${index * 30}deg) translateY(-118px)` }} />
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div {...fadeUp} className="section-copy">
+              <span>Molecular Intelligence</span>
+              <h2>Clean educational storytelling, powered by biology-inspired visuals and spatial depth.</h2>
+              <p>
+                Translate complex health concepts into calm visual systems. DNA-inspired motion,
+                molecular clusters, and scientific microinteractions help users understand their health
+                without overwhelming them.
+              </p>
+              <div className="science-blocks">
+                <article className="glass-card science-card">
+                  <FlaskConical size={18} />
+                  <div>
+                    <h3>Protein Mapping</h3>
+                    <p>Explain metabolic and cellular health with accessible visual summaries.</p>
+                  </div>
+                </article>
+                <article className="glass-card science-card">
+                  <Brain size={18} />
+                  <div>
+                    <h3>Neural Insight</h3>
+                    <p>Surface patterns, risks, and opportunities through beautifully layered AI models.</p>
+                  </div>
+                </article>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section id="pricing" className="landing-section">
+          <motion.div {...fadeUp} className="section-heading">
+            <span>Pricing</span>
+            <h2>Choose the right care intelligence plan for your health journey.</h2>
+          </motion.div>
+
+          <motion.div {...fadeUp} className="billing-toggle">
+            <button
+              type="button"
+              className={!yearly ? 'toggle-option active' : 'toggle-option'}
+              onClick={() => setYearly(false)}
+            >
+              Monthly
+            </button>
+            <button
+              type="button"
+              className={yearly ? 'toggle-option active' : 'toggle-option'}
+              onClick={() => setYearly(true)}
+            >
+              Yearly
+            </button>
+          </motion.div>
+
+          <div className="pricing-grid">
+            {planFeatures.map((plan, index) => (
+              <motion.article
+                key={plan.name}
+                className={plan.highlight ? 'pricing-card featured' : 'pricing-card glass-card'}
+                {...fadeUp}
+                transition={{ ...fadeUp.transition, delay: index * 0.08 }}
+                whileHover={{ y: -8 }}
+              >
+                <div className="pricing-label">{plan.highlight ? 'Most Popular' : 'Plan'}</div>
+                <h3>{plan.name}</h3>
+                <div className="pricing-value">
+                  {yearly ? plan.yearly : plan.monthly}
+                  <span>/mo</span>
+                </div>
+                <p>{plan.description}</p>
+                <ul>
+                  {plan.features.map((feature) => (
+                    <li key={feature}>
+                      <Check size={16} />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/dashboard" className={plan.highlight ? 'primary-button pricing-button' : 'secondary-button pricing-button'}>
+                  Get Started
+                </Link>
+              </motion.article>
             ))}
           </div>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}>
-              ⚠️ This system is not a replacement for professional medical diagnosis. Always consult a qualified healthcare provider.
-            </p>
-            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}>© 2026 MediAI. All rights reserved.</p>
+        </section>
+
+        <section className="landing-section">
+          <motion.div {...fadeUp} className="section-heading">
+            <span>Testimonials</span>
+            <h2>Patients and clinicians describe the experience as calm, premium, and surprisingly intuitive.</h2>
+          </motion.div>
+
+          <div className="testimonial-grid">
+            {testimonials.map((item, index) => (
+              <motion.article
+                key={item.name}
+                className="testimonial-card glass-card"
+                {...fadeUp}
+                transition={{ ...fadeUp.transition, delay: index * 0.1 }}
+              >
+                <div className="testimonial-top">
+                  <div className="testimonial-avatar" />
+                  <div>
+                    <h3>{item.name}</h3>
+                    <p>{item.role}</p>
+                  </div>
+                </div>
+                <blockquote>{item.quote}</blockquote>
+              </motion.article>
+            ))}
           </div>
+        </section>
+
+        <section id="faq" className="landing-section">
+          <div className="faq-layout">
+            <motion.div {...fadeUp} className="section-copy">
+              <span>FAQ</span>
+              <h2>Built for trust, clarity, and modern healthcare delivery.</h2>
+              <p>
+                Every layer of the experience is designed to reduce friction while keeping the product
+                feeling premium, calm, and ready for real-world healthcare workflows.
+              </p>
+            </motion.div>
+
+            <motion.div {...fadeUp} className="faq-list">
+              {faqItems.map((item, index) => (
+                <button
+                  key={item.question}
+                  type="button"
+                  className={openFaq === index ? 'faq-item open' : 'faq-item'}
+                  onClick={() => setOpenFaq(index)}
+                >
+                  <div className="faq-question">
+                    <span>{item.question}</span>
+                    <ChevronRight size={16} />
+                  </div>
+                  <p>{item.answer}</p>
+                </button>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      </main>
+
+      <footer id="contact" className="landing-footer">
+        <div className="section-frame footer-frame">
+          <div>
+            <Link to="/" className="brand-mark">
+              <span className="brand-icon">
+                <Activity size={18} />
+              </span>
+              <span className="brand-text">MediQo</span>
+            </Link>
+            <p className="footer-copy">
+              Elegant AI healthcare for connected clinics, modern families, and calmer care journeys.
+            </p>
+          </div>
+
+          <div className="footer-links">
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+          </div>
+
+          <form className="newsletter-card glass-card">
+            <label htmlFor="newsletter">Newsletter</label>
+            <div className="newsletter-row">
+              <input id="newsletter" type="email" placeholder="Enter your email" />
+              <button type="button" className="primary-button">
+                Join
+              </button>
+            </div>
+            <div className="social-row">
+              <a href="https://dribbble.com" target="_blank" rel="noreferrer">
+                Dribbble
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              <a href="https://x.com" target="_blank" rel="noreferrer">
+                X
+              </a>
+            </div>
+          </form>
         </div>
       </footer>
     </div>
